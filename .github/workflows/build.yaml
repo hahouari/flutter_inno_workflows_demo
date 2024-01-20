@@ -1,0 +1,14 @@
+name: Main workflow
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build-windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - run: flutter config --enable-windows-desktop
+      - run: flutter build windows
+      - run: dart run inno_bundle:build
