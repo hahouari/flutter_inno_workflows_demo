@@ -23,7 +23,7 @@ jobs:
 
       - name: Output config into github output
         id: envs
-        run: echo "$(dart run inno_bundle:build --envs --no-hf)" >> $GITHUB_OUTPUT
+        run: $env:GITHUB_OUTPUT += $(dart run inno_bundle:build --envs --no-hf)
 
       - name: Build installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
@@ -38,4 +38,4 @@ jobs:
             ./build/windows/x64/installer/Release/${{ steps.envs.outputs.APP_NAME_CAMEL_CASE }}-x86_64-${{ steps.envs.outputs.APP_VERSION }}-Installer.exe
           name: "${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
           target_commitish: dev
-          tag_name: "tb_v${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
+          tag_name: "v${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
