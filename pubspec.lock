@@ -103,10 +103,10 @@ packages:
     dependency: "direct dev"
     description:
       name: inno_bundle
-      sha256: "7526229d9d76ddf57ceaa4dd9a1a2d18e56c09366cee618586668c6195420526"
+      sha256: f45fd437a37414484281a520f4a76a6cf73becc87b8ddfe1cc078dcb987a9876
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "0.3.3"
   lints:
     dependency: transitive
     description:

@@ -4,11 +4,14 @@ on:
     branches:
       - dev
 jobs:
-  build-windows-installer:
+  windows-installer:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
       - run: flutter config --enable-windows-desktop
       - run: flutter build windows
-      - run: dart run inno_bundle:build
+      - run: dart run inno_bundle:build --release --no-installer
+      - uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: /build/windows/x64/installer/Release/inno-script.iss
