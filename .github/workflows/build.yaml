@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - dev
+permissions:
+  contents: write
 jobs:
   windows-installer:
     runs-on: windows-latest
