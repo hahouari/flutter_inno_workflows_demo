@@ -29,7 +29,9 @@ jobs:
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
           path: ./build/windows/x64/installer/Release/inno-script.iss
-      - uses: softprops/action-gh-release@v1
+
+      - name: Release installer
+        uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
