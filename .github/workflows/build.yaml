@@ -7,11 +7,33 @@ jobs:
   windows-installer:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-      - run: flutter config --enable-windows-desktop
-      - run: flutter build windows
-      - run: dart run inno_bundle:build --release --no-installer
-      - uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+
+      - name: Build Windows App
+        run: |
+          flutter config --enable-windows-desktop
+          flutter build -d windows
+
+      - name: Build iss script
+        run: dart run inno_bundle:build --no-app --release --no-installer
+
+      - name: Output config into github output
+        id: envs
+        run: echo "$(dart run inno_bundle:build --envs --no-hf)" >> $GITHUB_OUTPUT
+
+      - name: Build installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
-          path: /build/windows/x64/installer/Release/inno-script.iss
+          path: ./build/windows/x64/installer/Release/inno-script.iss
+      - uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            ./build/windows/x64/installer/Release/${{ steps.envs.outputs.APP_NAME_CAMEL_CASE }}-x86_64-${{ steps.envs.outputs.APP_VERSION }}-Installer.exe
+          name: "${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
+          target_commitish: dev
+          tag_name: "tb_v${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
