@@ -1,16 +1,8 @@
 # flutter_inno_workflows_demo
 
-A new Flutter project.
+A demo to setup Github Actions with Inno Bundle package to build an MS Windows Installer for your flutter app.
 
-## Getting Started
+Check out the [Github Workflow](https://github.com/hahouari/flutter_inno_workflows_demo/blob/dev/.github/workflows/build.yaml)
+for the steps to build a Release version of flutter app and publish it into a release.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Here you would find [the latest release](https://github.com/hahouari/flutter_inno_workflows_demo/releases/latest).
