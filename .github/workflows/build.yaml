@@ -1,8 +1,8 @@
-name: Main workflow
+name: Build App Installer
 on:
   push:
     branches:
-      - dev
+      - dev # <-- update this branch with your own
 permissions:
   contents: write
 jobs:
@@ -40,5 +40,5 @@ jobs:
           files: |
             ./build/windows/x64/installer/Release/${{ steps.envs.outputs.APP_NAME_CAMEL_CASE }}-x86_64-${{ steps.envs.outputs.APP_VERSION }}-Installer.exe
           name: "${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
-          target_commitish: dev
+          target_commitish: "${{ github.sha }}"
           tag_name: "v${{ steps.envs.outputs.APP_VERSION }}_${{ github.run_id }}"
